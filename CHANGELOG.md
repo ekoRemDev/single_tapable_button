@@ -1,7 +1,11 @@
-## 0.0.1
+## 0.0.3
 
-* initial release.
+- Example added
 
 ## 0.0.2
 
-* initial release.
+- initial release.
+
+## 0.0.1
+
+- initial release.
