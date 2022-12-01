@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:single_tapable_buttons/single_tapable_buttons.dart';
 
@@ -40,13 +41,28 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: SingleTapableButton(
-          onPressed: (StreamSink<bool> canBePressed) async {
-            // Do whatever has to be done
+        child: Container(
+          height: 48,
+          width: 200,
+          child: SingleTapableButton(
+            text: 'tap me',
+            onPressed: (StreamSink<bool> canBePressed) async {
+              // Do whatever has to be done
 
-            // Make button tappable again
-            canBePressed.add(true);
-          },
+              if (kDebugMode) {
+                print('Button is pressed');
+              }
+
+              // we are doing api call and it takes time
+
+              // Make button tappable again
+              Future.delayed(
+                const Duration(milliseconds: 2000),
+                () => canBePressed.add(true),
+              );
+              // canBePressed.add(true);
+            },
+          ),
         ),
       ),
     );
