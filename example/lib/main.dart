@@ -41,28 +41,25 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Container(
-          height: 48,
-          width: 200,
-          child: SingleTapableButton(
-            text: 'tap me',
-            onPressed: (StreamSink<bool> canBePressed) async {
-              // Do whatever has to be done
+        child: SingleTapableButton(
+          width: 400,
+          child: const Text('Tap me now...'),
+          onPressed: (StreamSink<bool> canBePressed) async {
+            // Do whatever has to be done
 
-              if (kDebugMode) {
-                print('Button is pressed');
-              }
+            if (kDebugMode) {
+              print('Button is pressed');
+            }
 
-              // we are doing api call and it takes time
+            // we are doing api call and it takes time
 
-              // Make button tappable again
-              Future.delayed(
-                const Duration(milliseconds: 2000),
-                () => canBePressed.add(true),
-              );
-              // canBePressed.add(true);
-            },
-          ),
+            // Make button tappable again
+            Future.delayed(
+              const Duration(milliseconds: 2000),
+              () => canBePressed.add(true),
+            );
+            // canBePressed.add(true);
+          },
         ),
       ),
     );

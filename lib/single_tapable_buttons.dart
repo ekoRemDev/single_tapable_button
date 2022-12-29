@@ -5,16 +5,20 @@ import 'package:flutter/material.dart';
 class SingleTapableButton extends StatefulWidget {
   final void Function(StreamSink<bool> canBePressed) onPressed;
   final Widget? child;
-  final String? text;
   final Color backgroundColor;
   final bool disabled;
+  final double? height;
+  final double? width;
+  final double? borderRadius;
 
   const SingleTapableButton({
     required this.onPressed,
     this.child,
-    this.text,
     this.backgroundColor = Colors.blue,
     this.disabled = false,
+    this.height = 48,
+    this.width = double.infinity,
+    this.borderRadius = 12,
   });
 
   @override
@@ -44,32 +48,60 @@ class _SingleTapableButtonState extends State<SingleTapableButton> {
     }
   }
 
+  Color getColor(Set<MaterialState> states) {
+    const Set<MaterialState> interactiveStates = <MaterialState>{
+      MaterialState.pressed,
+      MaterialState.disabled,
+    };
+    if (states.any(interactiveStates.contains)) {
+      return widget.backgroundColor.withOpacity(0.5);
+    }
+    return widget.backgroundColor;
+  }
+
+  RoundedRectangleBorder getBorder(Set<MaterialState> states) {
+    return RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(widget.borderRadius ?? 100),
+    );
+  }
+
+  double getElevation(Set<MaterialState> states) {
+    return 0;
+  }
+
+  Size getSize(Set<MaterialState> states) {
+    return Size(widget.height ?? double.infinity, widget.width ?? 48);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SizedBox.expand(
+    return SizedBox(
+      height: widget.height,
+      width: widget.width,
       child: StreamBuilder(
           stream: canButtonBePressedStream.stream,
           builder: (context, snapshot) {
-            var _canBePressed = (snapshot.data ?? false);
+            var canBePressed = (snapshot.data ?? false);
             return ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                backgroundColor: widget.backgroundColor,
-                elevation: 0,
+              style: ButtonStyle(
+                minimumSize: MaterialStateProperty.resolveWith(getSize),
+                backgroundColor: MaterialStateProperty.resolveWith(getColor),
+                shape: MaterialStateProperty.resolveWith(getBorder),
+                elevation: MaterialStateProperty.resolveWith(getElevation),
               ),
-              onPressed: _canBePressed
+              onPressed: canBePressed
                   ? () {
                       canButtonBePressedStream.sink.add(false);
                       widget.onPressed(canButtonBePressedStream.sink);
                     }
                   : null,
-              child: widget.text != null
-                  ? Text(
-                      widget.text!,
-                    )
-                  : widget.child ?? const SizedBox(),
+              child: canBePressed
+                  ? widget.child
+                  : const Center(
+                      child: CircularProgressIndicator(
+                        strokeWidth: 1,
+                      ),
+                    ),
             );
           }),
     );

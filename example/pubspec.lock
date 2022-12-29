@@ -105,10 +105,10 @@ packages:
   single_tapable_buttons:
     dependency: "direct dev"
     description:
-      name: single_tapable_buttons
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.2"
+      path: ".."
+      relative: true
+    source: path
+    version: "0.0.4"
   sky_engine:
     dependency: transitive
     description: flutter

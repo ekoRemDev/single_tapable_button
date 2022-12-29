@@ -1,6 +1,6 @@
 name: single_tapable_buttons
-description: Single tapable Button
-version: 0.0.3
+description: With this customizable button, you can control your button capability and styling
+version: 0.0.5
 homepage: https://github.com/ekoRemDev/single_tapable_button
 
 environment:
