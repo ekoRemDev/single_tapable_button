@@ -40,27 +40,81 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: SingleTapableButton(
-          width: 400,
-          child: const Text('Tap me now...'),
-          onPressed: (StreamSink<bool> canBePressed) async {
-            // Do whatever has to be done
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: SingleTapableButton(
+              buttonType: ButtonType.elevatedButton,
+              width: 400,
+              child: const Text('Tap me now...'),
+              onPressed: (StreamSink<bool> canBePressed) async {
+                // Do whatever has to be done
 
-            if (kDebugMode) {
-              print('Button is pressed');
-            }
+                if (kDebugMode) {
+                  print('Button is pressed');
+                }
 
-            // we are doing api call and it takes time
+                // we are doing api call and it takes time
 
-            // Make button tappable again
-            Future.delayed(
-              const Duration(milliseconds: 2000),
-              () => canBePressed.add(true),
-            );
-            // canBePressed.add(true);
-          },
-        ),
+                // Make button tappable again
+                Future.delayed(
+                  const Duration(milliseconds: 2000),
+                  () => canBePressed.add(true),
+                );
+                // canBePressed.add(true);
+              },
+            ),
+          ),
+          const SizedBox(height: 20),
+          Center(
+            child: SingleTapableButton(
+              buttonType: ButtonType.textButton,
+              width: 400,
+              child: const Text('Tap me now...'),
+              onPressed: (StreamSink<bool> canBePressed) async {
+                // Do whatever has to be done
+
+                if (kDebugMode) {
+                  print('Button is pressed');
+                }
+
+                // we are doing api call and it takes time
+
+                // Make button tappable again
+                Future.delayed(
+                  const Duration(milliseconds: 2000),
+                  () => canBePressed.add(true),
+                );
+                // canBePressed.add(true);
+              },
+            ),
+          ),
+          const SizedBox(height: 20),
+          Center(
+            child: SingleTapableButton(
+              buttonType: ButtonType.iconButton,
+              width: 40,
+              icon: const Icon(Icons.ac_unit),
+              onPressed: (StreamSink<bool> canBePressed) async {
+                // Do whatever has to be done
+
+                if (kDebugMode) {
+                  print('Button is pressed');
+                }
+
+                // we are doing api call and it takes time
+
+                // Make button tappable again
+                Future.delayed(
+                  const Duration(milliseconds: 2000),
+                  () => canBePressed.add(true),
+                );
+                // canBePressed.add(true);
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

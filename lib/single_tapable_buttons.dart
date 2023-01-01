@@ -2,23 +2,33 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+enum ButtonType { elevatedButton, textButton, iconButton }
+
 class SingleTapableButton extends StatefulWidget {
   final void Function(StreamSink<bool> canBePressed) onPressed;
+
+  /// If buttonType is ElevatedButton or TextButton, this widget has to be defined
   final Widget? child;
+
+  /// If buttonType is IconButton, this widget has to be defined
+  final Icon? icon;
   final Color backgroundColor;
   final bool disabled;
   final double? height;
   final double? width;
   final double? borderRadius;
+  final ButtonType buttonType;
 
   const SingleTapableButton({
     required this.onPressed,
     this.child,
+    this.icon,
     this.backgroundColor = Colors.blue,
     this.disabled = false,
     this.height = 48,
     this.width = double.infinity,
     this.borderRadius = 12,
+    this.buttonType = ButtonType.elevatedButton,
   });
 
   @override
@@ -82,27 +92,60 @@ class _SingleTapableButtonState extends State<SingleTapableButton> {
           stream: canButtonBePressedStream.stream,
           builder: (context, snapshot) {
             var canBePressed = (snapshot.data ?? false);
-            return ElevatedButton(
-              style: ButtonStyle(
-                minimumSize: MaterialStateProperty.resolveWith(getSize),
-                backgroundColor: MaterialStateProperty.resolveWith(getColor),
-                shape: MaterialStateProperty.resolveWith(getBorder),
-                elevation: MaterialStateProperty.resolveWith(getElevation),
-              ),
-              onPressed: canBePressed
-                  ? () {
-                      canButtonBePressedStream.sink.add(false);
-                      widget.onPressed(canButtonBePressedStream.sink);
-                    }
-                  : null,
-              child: canBePressed
-                  ? widget.child
-                  : const Center(
-                      child: CircularProgressIndicator(
-                        strokeWidth: 1,
+            if (widget.buttonType == ButtonType.elevatedButton) {
+              return ElevatedButton(
+                style: ButtonStyle(
+                  minimumSize: MaterialStateProperty.resolveWith(getSize),
+                  backgroundColor: MaterialStateProperty.resolveWith(getColor),
+                  shape: MaterialStateProperty.resolveWith(getBorder),
+                  elevation: MaterialStateProperty.resolveWith(getElevation),
+                ),
+                onPressed: canBePressed
+                    ? () {
+                        canButtonBePressedStream.sink.add(false);
+                        widget.onPressed(canButtonBePressedStream.sink);
+                      }
+                    : null,
+                child: canBePressed
+                    ? widget.child
+                    : const Center(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 1,
+                        ),
                       ),
+              );
+            } else if (widget.buttonType == ButtonType.textButton) {
+              return TextButton(
+                onPressed: canBePressed
+                    ? () {
+                        canButtonBePressedStream.sink.add(false);
+                        widget.onPressed(canButtonBePressedStream.sink);
+                      }
+                    : null,
+                child: canBePressed
+                    ? widget.child ?? const SizedBox()
+                    : const Center(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 1,
+                        ),
+                      ),
+              );
+            } else if (widget.buttonType == ButtonType.iconButton) {
+              return IconButton(
+                icon: widget.icon ??
+                    const Icon(
+                      Icons.add,
                     ),
-            );
+                onPressed: canBePressed
+                    ? () {
+                        canButtonBePressedStream.sink.add(false);
+                        widget.onPressed(canButtonBePressedStream.sink);
+                      }
+                    : null,
+              );
+            } else {
+              return const SizedBox();
+            }
           }),
     );
   }
