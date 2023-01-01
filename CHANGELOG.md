@@ -1,3 +1,8 @@
+## 0.0.6
+
+- TextButton added
+- IconButton added
+
 ## 0.0.5
 
 - Enhancements styling
