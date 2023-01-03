@@ -1,4 +1,8 @@
-## 0.0.9
+## 0.0.10
+
+- loader can be enabled/disabled
+
+- ## 0.0.9
 
 - Bugfixes
 

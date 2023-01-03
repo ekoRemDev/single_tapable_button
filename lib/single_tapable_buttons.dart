@@ -26,6 +26,7 @@ class SingleTapableButton extends StatefulWidget {
   final double? width;
   final double? borderRadius;
   final ButtonType buttonType;
+  final bool isLoaderEnabled;
 
   const SingleTapableButton({
     required this.onPressed,
@@ -38,6 +39,7 @@ class SingleTapableButton extends StatefulWidget {
     this.width = double.infinity,
     this.borderRadius = 12,
     this.buttonType = ButtonType.elevatedButton,
+    this.isLoaderEnabled = true,
   });
 
   @override
@@ -117,11 +119,11 @@ class _SingleTapableButtonState extends State<SingleTapableButton> {
                     : null,
                 child: canBePressed
                     ? widget.child
-                    : const Center(
+                    : widget.isLoaderEnabled ? const Center(
                         child: CircularProgressIndicator(
                           strokeWidth: 1,
                         ),
-                      ),
+                      ) : const SizedBox(),
               );
             } else if (widget.buttonType == ButtonType.textButton) {
               return TextButton(
@@ -133,11 +135,11 @@ class _SingleTapableButtonState extends State<SingleTapableButton> {
                     : null,
                 child: canBePressed
                     ? widget.child ?? const SizedBox()
-                    : const Center(
+                    : widget.isLoaderEnabled ? const Center(
                         child: CircularProgressIndicator(
                           strokeWidth: 1,
                         ),
-                      ),
+                      ) : const SizedBox(),
               );
             } else if (widget.buttonType == ButtonType.iconButton) {
               return IconButton(
@@ -162,11 +164,11 @@ class _SingleTapableButtonState extends State<SingleTapableButton> {
                     : null,
                 child: canBePressed
                     ? widget.child ?? const SizedBox()
-                    : const Center(
+                    : widget.isLoaderEnabled ? const Center(
                         child: CircularProgressIndicator(
                           strokeWidth: 1,
                         ),
-                      ),
+                      ) : const SizedBox(),
               );
             } else if (widget.buttonType == ButtonType.outlinedButton) {
               return OutlinedButton(
@@ -183,11 +185,11 @@ class _SingleTapableButtonState extends State<SingleTapableButton> {
                     : null,
                 child: canBePressed
                     ? widget.child ?? const SizedBox()
-                    : const Center(
+                    : widget.isLoaderEnabled ? const Center(
                         child: CircularProgressIndicator(
                           strokeWidth: 1,
                         ),
-                      ),
+                      ) : const SizedBox(),
               );
             } else {
               return const SizedBox();
