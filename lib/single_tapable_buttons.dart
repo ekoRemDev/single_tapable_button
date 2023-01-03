@@ -2,7 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-enum ButtonType { elevatedButton, textButton, iconButton, listItem }
+enum ButtonType {
+  elevatedButton,
+  textButton,
+  iconButton,
+  listItem,
+  outlinedButton
+}
 
 class SingleTapableButton extends StatefulWidget {
   final void Function(StreamSink<bool> canBePressed) onPressed;
@@ -144,16 +150,26 @@ class _SingleTapableButtonState extends State<SingleTapableButton> {
                     : null,
               );
             } else if (widget.buttonType == ButtonType.listItem) {
-              return InkWell(
+              return GestureDetector(
                 onTap: canBePressed
                     ? () {
-                  canButtonBePressedStream.sink.add(false);
-                  widget.onPressed(canButtonBePressedStream.sink);
-                }
+                        canButtonBePressedStream.sink.add(false);
+                        widget.onPressed(canButtonBePressedStream.sink);
+                      }
                     : null,
                 child: widget,
               );
-            }else {
+            } else if (widget.buttonType == ButtonType.outlinedButton) {
+              return OutlinedButton(
+                onPressed: canBePressed
+                    ? () {
+                        canButtonBePressedStream.sink.add(false);
+                        widget.onPressed(canButtonBePressedStream.sink);
+                      }
+                    : null,
+                child: widget,
+              );
+            } else {
               return const SizedBox();
             }
           }),

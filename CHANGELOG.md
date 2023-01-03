@@ -1,3 +1,8 @@
+## 0.0.8
+
+- OutlinedButton added
+- InkWell changed into GestureDetector
+
 ## 0.0.7
 
 - Tappable list item added
