@@ -1,5 +1,9 @@
 ## 0.0.6
 
+- Tappable list item added
+
+## 0.0.6
+
 - TextButton added
 - IconButton added
 

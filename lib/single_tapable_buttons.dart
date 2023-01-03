@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-enum ButtonType { elevatedButton, textButton, iconButton }
+enum ButtonType { elevatedButton, textButton, iconButton, listItem }
 
 class SingleTapableButton extends StatefulWidget {
   final void Function(StreamSink<bool> canBePressed) onPressed;
@@ -143,7 +143,17 @@ class _SingleTapableButtonState extends State<SingleTapableButton> {
                       }
                     : null,
               );
-            } else {
+            } else if (widget.buttonType == ButtonType.listItem) {
+              return InkWell(
+                onTap: canBePressed
+                    ? () {
+                  canButtonBePressedStream.sink.add(false);
+                  widget.onPressed(canButtonBePressedStream.sink);
+                }
+                    : null,
+                child: widget,
+              );
+            }else {
               return const SizedBox();
             }
           }),
