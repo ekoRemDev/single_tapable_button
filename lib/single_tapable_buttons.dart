@@ -19,6 +19,8 @@ class SingleTapableButton extends StatefulWidget {
   /// If buttonType is IconButton, this widget has to be defined
   final Icon? icon;
   final Color backgroundColor;
+  /// This is used in OutlinedButton
+  final Color borderColor;
   final bool disabled;
   final double? height;
   final double? width;
@@ -30,6 +32,7 @@ class SingleTapableButton extends StatefulWidget {
     this.child,
     this.icon,
     this.backgroundColor = Colors.blue,
+    this.borderColor = Colors.amber,
     this.disabled = false,
     this.height = 48,
     this.width = double.infinity,
@@ -157,17 +160,34 @@ class _SingleTapableButtonState extends State<SingleTapableButton> {
                         widget.onPressed(canButtonBePressedStream.sink);
                       }
                     : null,
-                child: widget,
+                child: canBePressed
+                    ? widget.child ?? const SizedBox()
+                    : const Center(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 1,
+                        ),
+                      ),
               );
             } else if (widget.buttonType == ButtonType.outlinedButton) {
               return OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  backgroundColor: widget.backgroundColor,
+                  side: BorderSide(color: widget.borderColor, width: 0, ),
+
+                ),
                 onPressed: canBePressed
                     ? () {
                         canButtonBePressedStream.sink.add(false);
                         widget.onPressed(canButtonBePressedStream.sink);
                       }
                     : null,
-                child: widget,
+                child: canBePressed
+                    ? widget.child ?? const SizedBox()
+                    : const Center(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 1,
+                        ),
+                      ),
               );
             } else {
               return const SizedBox();

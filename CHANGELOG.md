@@ -1,3 +1,7 @@
+## 0.0.9
+
+- Bugfixes
+
 ## 0.0.8
 
 - OutlinedButton added

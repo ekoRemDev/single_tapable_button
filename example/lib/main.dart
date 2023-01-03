@@ -114,6 +114,56 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
           ),
+          const SizedBox(height: 20),
+          Center(
+            child: SingleTapableButton(
+              buttonType: ButtonType.listItem,
+              width: 40,
+              child: const Icon(Icons.ac_unit),
+              onPressed: (StreamSink<bool> canBePressed) async {
+                // Do whatever has to be done
+
+                if (kDebugMode) {
+                  print('Button is pressed');
+                }
+
+                // we are doing api call and it takes time
+
+                // Make button tappable again
+                Future.delayed(
+                  const Duration(milliseconds: 2000),
+                      () => canBePressed.add(true),
+                );
+                // canBePressed.add(true);
+              },
+            ),
+          ),
+          const SizedBox(height: 20),
+          Center(
+            child: SingleTapableButton(
+              buttonType: ButtonType.outlinedButton,
+              width: 400,
+              backgroundColor: Colors.white,
+              borderColor: Colors.black,
+              child: const Text('ButtonType.outlinedButton'),
+              onPressed: (StreamSink<bool> canBePressed) async {
+                // Do whatever has to be done
+
+                if (kDebugMode) {
+                  print('Button is pressed');
+                }
+
+                // we are doing api call and it takes time
+
+                // Make button tappable again
+                Future.delayed(
+                  const Duration(milliseconds: 2000),
+                      () => canBePressed.add(true),
+                );
+                // canBePressed.add(true);
+              },
+            ),
+          ),
         ],
       ),
     );
