@@ -11,4 +11,24 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
+# single_tappable_buttons
+A declarative routing package for Flutter that uses the Router API to provide a
+convenient, url-based API for navigating between different screens. You can
+define URL patterns, navigate using a URL, handle deep links, and a number of
+other navigation-related scenarios.
+
+## Features
+SingleTapableButton has a number of Button type to customize:
+
+- ElevatedButton
+- TextButton
+- IconButton
+- OutlinedButton
+
+## Changelog
+See the
+[Changelog](https://github.com/ekoRemDev/single_tapable_button/blob/master/CHANGELOG.md)
+for a list of new features and breaking changes.
+
+
 This Button package allow us to have more control over tapability of the buttons
