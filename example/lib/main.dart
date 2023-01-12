@@ -25,7 +25,10 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({
+    super.key,
+    required this.title,
+  });
 
   final String title;
 
@@ -133,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 // Make button tappable again
                 Future.delayed(
                   const Duration(milliseconds: 2000),
-                      () => canBePressed.add(true),
+                  () => canBePressed.add(true),
                 );
                 // canBePressed.add(true);
               },
@@ -159,14 +162,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 // Make button tappable again
                 Future.delayed(
                   const Duration(milliseconds: 2000),
-                      () => canBePressed.add(true),
+                  () => canBePressed.add(true),
                 );
                 // canBePressed.add(true);
               },
             ),
           ),
-
-          const Divider(height: 1,),
+          const Divider(
+            height: 1,
+          ),
           const Text('Loader disabled Examples'),
           Center(
             child: SingleTapableButton(
@@ -186,7 +190,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 // Make button tappable again
                 Future.delayed(
                   const Duration(milliseconds: 2000),
-                      () => canBePressed.add(true),
+                  () => canBePressed.add(true),
                 );
                 // canBePressed.add(true);
               },
@@ -211,7 +215,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 // Make button tappable again
                 Future.delayed(
                   const Duration(milliseconds: 2000),
-                      () => canBePressed.add(true),
+                  () => canBePressed.add(true),
                 );
                 // canBePressed.add(true);
               },
@@ -236,7 +240,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 // Make button tappable again
                 Future.delayed(
                   const Duration(milliseconds: 2000),
-                      () => canBePressed.add(true),
+                  () => canBePressed.add(true),
                 );
                 // canBePressed.add(true);
               },
@@ -261,7 +265,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 // Make button tappable again
                 Future.delayed(
                   const Duration(milliseconds: 2000),
-                      () => canBePressed.add(true),
+                  () => canBePressed.add(true),
                 );
                 // canBePressed.add(true);
               },
@@ -288,7 +292,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 // Make button tappable again
                 Future.delayed(
                   const Duration(milliseconds: 2000),
-                      () => canBePressed.add(true),
+                  () => canBePressed.add(true),
                 );
                 // canBePressed.add(true);
               },

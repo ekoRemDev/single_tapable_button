@@ -48,6 +48,7 @@ class SingleTapableButton extends StatefulWidget {
 
 class _SingleTapableButtonState extends State<SingleTapableButton> {
   final StreamController<bool> canButtonBePressedStream = StreamController();
+  bool _canBePressed = false;
 
   @override
   void initState() {
@@ -102,7 +103,7 @@ class _SingleTapableButtonState extends State<SingleTapableButton> {
       child: StreamBuilder(
           stream: canButtonBePressedStream.stream,
           builder: (context, snapshot) {
-            var canBePressed = (snapshot.data ?? false);
+            _canBePressed = (snapshot.data ?? false) as bool;
             if (widget.buttonType == ButtonType.elevatedButton) {
               return ElevatedButton(
                 style: ButtonStyle(
@@ -111,13 +112,13 @@ class _SingleTapableButtonState extends State<SingleTapableButton> {
                   shape: MaterialStateProperty.resolveWith(getBorder),
                   elevation: MaterialStateProperty.resolveWith(getElevation),
                 ),
-                onPressed: canBePressed
+                onPressed: _canBePressed
                     ? () {
                         canButtonBePressedStream.sink.add(false);
                         widget.onPressed(canButtonBePressedStream.sink);
                       }
                     : null,
-                child: canBePressed
+                child: _canBePressed
                     ? widget.child
                     : widget.isLoaderEnabled ? const Center(
                         child: CircularProgressIndicator(
@@ -127,13 +128,13 @@ class _SingleTapableButtonState extends State<SingleTapableButton> {
               );
             } else if (widget.buttonType == ButtonType.textButton) {
               return TextButton(
-                onPressed: canBePressed
+                onPressed: _canBePressed
                     ? () {
                         canButtonBePressedStream.sink.add(false);
                         widget.onPressed(canButtonBePressedStream.sink);
                       }
                     : null,
-                child: canBePressed
+                child: _canBePressed
                     ? widget.child ?? const SizedBox()
                     : widget.isLoaderEnabled ? const Center(
                         child: CircularProgressIndicator(
@@ -147,7 +148,7 @@ class _SingleTapableButtonState extends State<SingleTapableButton> {
                     const Icon(
                       Icons.add,
                     ),
-                onPressed: canBePressed
+                onPressed: _canBePressed
                     ? () {
                         canButtonBePressedStream.sink.add(false);
                         widget.onPressed(canButtonBePressedStream.sink);
@@ -156,13 +157,13 @@ class _SingleTapableButtonState extends State<SingleTapableButton> {
               );
             } else if (widget.buttonType == ButtonType.listItem) {
               return GestureDetector(
-                onTap: canBePressed
+                onTap: _canBePressed
                     ? () {
                         canButtonBePressedStream.sink.add(false);
                         widget.onPressed(canButtonBePressedStream.sink);
                       }
                     : null,
-                child: canBePressed
+                child: _canBePressed
                     ? widget.child ?? const SizedBox()
                     : widget.isLoaderEnabled ? const Center(
                         child: CircularProgressIndicator(
@@ -177,13 +178,13 @@ class _SingleTapableButtonState extends State<SingleTapableButton> {
                   side: BorderSide(color: widget.borderColor, width: 0, ),
 
                 ),
-                onPressed: canBePressed
+                onPressed: _canBePressed
                     ? () {
                         canButtonBePressedStream.sink.add(false);
                         widget.onPressed(canButtonBePressedStream.sink);
                       }
                     : null,
-                child: canBePressed
+                child: _canBePressed
                     ? widget.child ?? const SizedBox()
                     : widget.isLoaderEnabled ? const Center(
                         child: CircularProgressIndicator(
