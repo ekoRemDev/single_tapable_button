@@ -2,11 +2,19 @@
 
 - Doc Update
 
+## 0.0.12
+
+- Doc Update
+
+## 0.0.11
+
+- Clean up
+
 ## 0.0.10
 
 - loader can be enabled/disabled
 
-- ## 0.0.9
+## 0.0.9
 
 - Bugfixes
 
