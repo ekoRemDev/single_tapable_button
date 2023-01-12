@@ -12,10 +12,7 @@ and the Flutter guide for
 -->
 
 # single_tappable_buttons
-A declarative routing package for Flutter that uses the Router API to provide a
-convenient, url-based API for navigating between different screens. You can
-define URL patterns, navigate using a URL, handle deep links, and a number of
-other navigation-related scenarios.
+Customizable buttons with single tap control
 
 ## Features
 SingleTapableButton has a number of Button type to customize:
